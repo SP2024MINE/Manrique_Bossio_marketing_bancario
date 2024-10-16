@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "marketing-bancario"
+version = "0.1.0"
+description = "Librerias necesarias para la ejecucion del proyecto de marketing bancario"
+authors = ["Camilo Manrique, Armando Bossio"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
