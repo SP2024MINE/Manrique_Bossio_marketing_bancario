@@ -13,12 +13,6 @@ Este proyecto utiliza Machine Learning para predecir si un cliente de una instit
 
 - [Descripción del Proyecto](#descripción-del-proyecto)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Instrucciones de Instalación](#instrucciones-de-instalación)
-- [Uso](#uso)
-- [API](#api)
-- [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
 
 ## Descripción del Proyecto
 
