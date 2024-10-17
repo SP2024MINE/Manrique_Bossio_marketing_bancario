@@ -1,0 +1,35 @@
+import pandas as pd
+from ucimlrepo import fetch_ucirepo
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+
+def load_data(path):
+    df = fetch_ucirepo(id=222)
+    return df
+
+def preprocess_data(df):
+    # Separar características y la variable objetivo
+    X = df.drop('y', axis=1)
+    y = df['y'].apply(lambda x: 1 if x == 'yes' else 0)
+    
+    # Definir variables categóricas y numéricas
+    variables_categoricas = ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month', 'poutcome']
+    variables_numericas = ['age', 'balance', 'day', 'duration', 'campaign', 'pdays', 'previous', 'emp_var_rate', 'cons_price_idx', 'cons_conf_idx', 'euribor3m', 'nr_employed']
+    
+    # Preprocesamiento de las variables
+    preproceso = ColumnTransformer(
+        transformers=[
+            ('num', StandardScaler(), variables_categoricas),
+            ('cat', OneHotEncoder(drop='first'), variables_numericas)
+        ])
+    
+    # Dividir en conjuntos de entrenamiento y prueba
+    X_grupo, X_prueba, y_grupo, y_prueba = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    # Ajustar el preprocesador a los datos de entrenamiento y transformar ambos conjuntos
+    X_grupo_preprocesado = preprocessor.fit_transform(X_grupo)
+    X_prueba_preprocesada = preprocessor.transform(X_prueba)
+    
+    return X_grupo_preprocesado, X_prueba_preprocesada, y_grupo, y_prueba, preproceso
