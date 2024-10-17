@@ -1,8 +1,7 @@
-# main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pandas as pd
-from train_model import entrenar_modelo
+from Codigo.entrenamiento import entrenar_modelo
 
 # Entrenar el modelo
 modelo = entrenar_modelo()
