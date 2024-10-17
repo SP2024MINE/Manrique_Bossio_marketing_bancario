@@ -1,20 +1,29 @@
+import pandas as pd
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
-def pipeline_1(preproceso):
-    pipeline = Pipeline([
-        ('preproceso', preproceso),
-        ('modelo', LogisticRegression(max_iter=1000))
+# Definir variables categóricas y numéricas
+variables_categoricas = ['job', 'marital', 'education', 'housing', 'loan', 'contact', 'month', 'poutcome']
+variables_numericas = ['age', 'balance', 'day_of_week', 'duration', 'campaign', 'pdays', 'previous']
+
+# Preprocesamiento: Escalado de variables numéricas y codificación de variables categóricas
+preprocesamiento = ColumnTransformer(
+    transformers=[
+        ('num', StandardScaler(), variables_numericas),
+        ('cat', OneHotEncoder(handle_unknown='ignore', drop='first'), variables_categoricas)
     ])
+
+# Crear el pipeline con preprocesamiento y modelo
+pipeline = Pipeline(steps=[
+    ('preprocesamiento', preprocesamiento),
+    ('modelo', LogisticRegression(max_iter=1000))
+])
+
+def entrenar_modelo(X, y):
+    pipeline.fit(X, y)
     return pipeline
 
-def pipeline_2(X_grupo, y_grupo, preproceso):
-    pipeline = create_pipeline(preproceso)
-    pipeline.fit(X_grupo, y_grupo)
-    return pipeline
-
-def pipeline_3(pipeline, X_prueba, y_prueba):
-    y_predicion = pipeline.predict(X_prueba)
-    precision = accuracy_score(y_prueba, y_predicion)
-    print(f"Precision: {precision}")
+def predecir(X_nuevo):
+    return pipeline.predict(X_nuevo)
