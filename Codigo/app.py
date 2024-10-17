@@ -6,7 +6,7 @@ from ucimlrepo import fetch_ucirepo
 
 modelo = entrenar_modelo()
 
-st.title("Predicción de Suscripción a Depósitos a Plazo")
+st.title("Predicción de Suscripción prestamos bancarios")
 st.write("Ingrese la información del cliente:")
 
 age = st.number_input("Edad", min_value=18, max_value=100, value=30)
