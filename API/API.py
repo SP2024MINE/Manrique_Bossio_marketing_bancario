@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pandas as pd
-from Codigo.entrenamiento import entrenar_modelo
+from MANRIQUE_BOSSIO_MARKETING_BANCARIO.Codigo.entrenamiento import entrenar_modelo
 
 # Entrenar el modelo
 modelo = entrenar_modelo()
